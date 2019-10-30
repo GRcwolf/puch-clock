@@ -21,4 +21,13 @@ public class EntryService {
     public List<Entry> findAll() {
         return entryRepository.findAll();
     }
+
+    public boolean deleteEntry(long id) {
+        boolean deleted = false;
+        if (entryRepository.existsById(id)) {
+            entryRepository.deleteById(id);
+            deleted = true;
+        }
+        return deleted;
+    }
 }
