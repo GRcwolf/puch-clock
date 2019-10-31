@@ -34,4 +34,10 @@ public class EntryController {
     public boolean deleteEntry(@PathVariable("id") long id) {
         return entryService.deleteEntry(id);
     }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Entry patchEntry(@PathVariable("id") long id, @Valid @RequestBody Entry entry) {
+        return entryService.patchEntry(entry, id);
+    }
 }

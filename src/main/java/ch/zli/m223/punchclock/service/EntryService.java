@@ -30,4 +30,12 @@ public class EntryService {
         }
         return deleted;
     }
+
+    public Entry patchEntry(Entry entry, long id) {
+        Entry currentEntry = entryRepository.getOne(id);
+        currentEntry.setCheckIn(entry.getCheckIn());
+        currentEntry.setCheckOut(entry.getCheckOut());
+        entryRepository.save(entry);
+        return entry;
+    }
 }
