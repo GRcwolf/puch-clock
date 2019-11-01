@@ -1,28 +1,49 @@
 package ch.zli.m223.punchclock.controller;
 
 import ch.zli.m223.punchclock.domain.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ch.zli.m223.punchclock.repository.UserRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import ch.zli.m223.punchclock.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
+    private UserService userService;
     private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserController(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserController(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userService = userService;
     }
 
     @PostMapping("/sign-up")
-    public void signUp(@RequestBody User user) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void signUp(@RequestBody @Valid User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
+    }
+
+    @GetMapping("user/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public User getUser(@PathVariable long id) {
+        return userService.getUser(id);
+    }
+
+    @DeleteMapping("user/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean deleteUser(@PathVariable long id) {
+        return userService.deleteUser(id);
+    }
+
+    @PatchMapping("user/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public User patchUser(@PathVariable long id, @RequestBody @Valid User user) {
+        return userService.patchUser(id, user);
     }
 }
