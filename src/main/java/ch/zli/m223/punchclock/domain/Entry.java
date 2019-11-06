@@ -25,6 +25,8 @@ public class Entry {
     @Column(nullable = false)
     private LocalDateTime checkOut;
 
+    private long userId;
+
     public Long getId() {
         return id;
     }
@@ -47,5 +49,13 @@ public class Entry {
 
     public void setCheckOut(LocalDateTime checkOut) {
         this.checkOut = checkOut;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

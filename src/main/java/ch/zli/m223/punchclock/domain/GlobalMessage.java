@@ -12,19 +12,17 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-public class Comment {
+public class GlobalMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String content;
-
-    private long entryId;
-
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private LocalDateTime createTime;
+    private LocalDateTime expiresAt;
+
+    private String messageContent;
 
     private long creatorId;
 
@@ -36,28 +34,20 @@ public class Comment {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public LocalDateTime getExpiresAt() {
+        return expiresAt;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setExpiresAt(LocalDateTime expiresAt) {
+        this.expiresAt = expiresAt;
     }
 
-    public long getEntryId() {
-        return entryId;
+    public String getMessageContent() {
+        return messageContent;
     }
 
-    public void setEntryId(long entryId) {
-        this.entryId = entryId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
+    public void setMessageContent(String messageContent) {
+        this.messageContent = messageContent;
     }
 
     public long getCreatorId() {
