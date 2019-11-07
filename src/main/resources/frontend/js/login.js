@@ -24,6 +24,30 @@ $(document).ready(() => {
             error: function (a, b, c) {
                 console.log({a, b, c})
             }
-        })
+        });
+    });
+
+    $('#register-form').on('submit', (evt) => {
+        evt.preventDefault();
+        const username = $('#register-username').val();
+        const password = $('#register-password').val();
+
+        $.ajax({
+            url: "http://localhost:8081/users/sign-up",
+            context: document.body,
+            method: 'POST',
+            data: JSON.stringify({
+                username,
+                password
+            }),
+            contentType: 'application/json; charset=utf-8',
+            success: function(data) {
+                console.log(data);
+                M.toast({ html: 'User has been created'});
+            },
+            error: function (a, b, c) {
+                console.log({a, b, c})
+            }
+        });
     });
 });
