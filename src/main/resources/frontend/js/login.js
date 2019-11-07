@@ -2,6 +2,7 @@ $(document).ready(() => {
     if ($.cookie('authToken')) {
         window.location.href = 'entries.html';
     }
+
     $('#login-form').on('submit', (evt) => {
         evt.preventDefault();
         const username = $('#username').val();

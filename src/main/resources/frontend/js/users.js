@@ -3,6 +3,11 @@ $(document).ready(() => {
         window.location.href = 'index.html';
     }
     getUsers();
+
+    $('#logout').on('click', evt => {
+        evt.preventDefault();
+        $.cookie('authToken', '', { expires: -1 });
+    });
 });
 
 function getUsers() {

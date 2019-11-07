@@ -10,6 +10,11 @@ $(document).ready(() => {
     format: 'c',
   });
 
+  $('#logout').on('click', evt => {
+    evt.preventDefault();
+    $.cookie('authToken', '', { expires: -1 });
+  });
+
   $('#entries-create-form').on('submit', evt => {
     evt.preventDefault();
     const checkIn = new Date($('#check-in').val()).toISOString();
