@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
     private CommentService commentService;
 
+    /**
+     * Constructs a CommentController.
+     *
+     * @param commentService
+     *  The service of the comments.
+     */
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
