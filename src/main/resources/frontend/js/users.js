@@ -6,7 +6,7 @@ $(document).ready(() => {
 
     $('#logout').on('click', evt => {
         evt.preventDefault();
-        $.cookie('authToken', '', { expires: -1 });
+        $.removeCookie('authToken');
     });
 });
 
