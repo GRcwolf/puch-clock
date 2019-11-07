@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
-import static java.util.Collections.unmodifiableSortedSet;
 
 @Service
 public class UserService implements UserDetailsService {

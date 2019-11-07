@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.POST;
 import java.util.List;
 
 @RestController
@@ -62,5 +63,19 @@ public class CommentController {
     @DeleteMapping("/{id}")
     public boolean deleteComment(@PathVariable @Valid long id) {
         return this.commentService.delete(id);
+    }
+
+    /**
+     * Creates a new Comment.
+     *
+     * @param comment
+     *  The comment to be created.
+     * @return
+     *  The created comment.
+     */
+    @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Comment createComment(@RequestBody @Valid Comment comment) {
+        return this.commentService.create(comment);
     }
 }
