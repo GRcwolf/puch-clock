@@ -1,13 +1,16 @@
 # M223: Punchclock
-Dies ist eine Beispielapplikation für das Modul M223.
+Dies ist eine Applikaiton für das Modul M223.
 
 ## Loslegen
 Folgende Schritte befolgen um loszulegen:
-1. Sicherstellen, dass JDK 12 installiert und in der Umgebungsvariable `path` definiert ist.
+1. Sicherstellen, dass JDK 11 installiert und in der Umgebungsvariable `path` definiert ist.
 1. Ins Verzeichnis der Applikation wechseln und über die Kommandozeile mit `./gradlew bootRun` oder `./gradlew.bat bootRun` starten
-1. Unittest mit `./gradlew test` oder `./gradlew.bat test` ausführen.
-1. Ein ausführbares JAR kann mit `./gradlew bootJar` oder `./gradlew.bat bootJar` erstellt werden.
 
-Folgende Dienste stehen während der Ausführung im Profil `dev` zur Verfügung:
-- REST-Schnittstelle der Applikation: http://localhost:8081
-- Dashboard der H2 Datenbank: http://localhost:8081/h2-console
+## Funktionalität
+Die Applikation stellt unter `/users` verschiedene Pfade zur Anpassung und Erstellung von Nutzern.
+
+Die Applikation stellt unter `/entries` können Einträge der Zeiterfassung angepasst werden.
+Diese können dort auch gelöscht oder angepasst werden.
+
+In der Applikation sind auch noch noch `Comments` und `Goobal` messages vorhanden.
+Diese sind allerdings nicht in gebrauch.
