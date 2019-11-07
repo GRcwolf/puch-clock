@@ -1,15 +1,16 @@
 let tableBody = $('tbody');
 
 $(document).ready(() => {
-  let tableBody = $('tbody');
+  if (!$.cookie('authToken')) {
+    window.location.href = 'index.html';
+  }
   getData();
   $.datetimepicker.setLocale('en');
   $('.date-picker').datetimepicker({
     format: 'c',
   });
 
-  $('#create-entry-trigger').on('click', evt => {
-    console.log('click');
+  $('#entries-create-form').on('submit', evt => {
     evt.preventDefault();
     const checkIn = new Date($('#check-in').val()).toISOString();
     const checkOut = new Date($('#check-out').val()).toISOString();
@@ -23,6 +24,9 @@ function getData() {
     context: document.body,
     method: 'GET',
     dataType: 'json',
+    headers: {
+      Authorization: $.cookie('authToken'),
+    },
   }).done(response => {
     for (let i = 0; i < response.length; i += 1) {
       tableBody.append(
@@ -46,6 +50,9 @@ function createEntry(dataToSend) {
     method: 'POST',
     dataType: 'json',
     data: JSON.stringify(dataToSend),
+    headers: {
+      Authorization: $.cookie('authToken'),
+    },
     contentType: "application/json; charset=utf-8",
   }).done(() => {
     tableBody.empty();
@@ -57,9 +64,11 @@ function createEntry(dataToSend) {
 function deleteEntry(id) {
   $.ajax({
     url: `http://localhost:8081/entries/${id}`,
-    context: document.body,
     method: 'DELETE',
-    dataType: 'json',
+    headers: {
+      'Authorization': $.cookie('authToken'),
+    },
+    contentType: "application/json; charset=utf-8",
   }).done(() => {
     tableBody.empty();
     M.toast({ html: 'Entry has been deleted' });
